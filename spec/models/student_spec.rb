@@ -60,24 +60,35 @@ RSpec.describe Student, type: :model do
       is_less_than_or_equal_to(4.0)
     end
 
-    describe "uniqueness" do
-      before(:each) do
-            @student = Student.create(
-              name: 'jill',
-              student_number: 123,
-              gpa: 3.87,
-              school_id: 8
-            )
-      end
-      
-      it { should validate_uniqueness_of :name } 
-      # @school = School.create(name: 'foo', address: '123', principal: 'mt', capacity: 15)
-      
-      # Student.create!(name: 'foo', student_number: '123', gpa: 3.4, school_id: 1) 
-      # subject { Student.new(name: 'foo', student_number: '123', gpa: 3.4, school_id: 1) }
-      # it { should validate_uniqueness_of(:name) }
-    end
+    
 
   end
 
+  describe "uniqueness" do
+    
+  
+     subject {
+      @school = School.create!(name: 'foo', address: '123', principal: 'mt', capacity: 15)
+       Student.create!(
+       school_id: @school.id,
+       name: 'jill',
+       student_number: 123,
+       gpa: 3.87
+     )
+    }
+    #  @student2 = Student.create!(
+    #    school_id: @school.id,
+    #    name: 'bob',
+    #    student_number: 123,
+    #    gpa: 3.87
+    #  )
+  
+     # it { should validate_uniqueness_of(:name) } 
+     # end
+      #binding.pry
+      # Student.create!(name: 'foo', student_number: '123', gpa: 3.4, school_id: @school.id) 
+      # subject { Student.new(name: 'foo', student_number: '123', gpa: 3.4, school_id: @school.id) }
+     
+   it { should validate_uniqueness_of(:name) }
+   end
 end 
